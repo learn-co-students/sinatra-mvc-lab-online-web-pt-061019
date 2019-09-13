@@ -5,5 +5,5 @@
     <title>Pig Latinizer!</title>
   </head>
   <body>
-  <h1>Your new sentence is: <%= @user_phrase %> </h1>
+  <h1>Your new sentence is: <%= PigLatinizer.new.piglatinize(@words) %> </h1>
   </body> 
