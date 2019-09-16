@@ -1,12 +1,5 @@
 class PigLatinizer
 
-  # attr_reader :string
- 
-  # def initialize(string)
-  #   @string = string.downcase
-  # end
- 
-
   def piglatinize(string)
     a = string.split(" ")
     b = a.map {|word| piglatinize_word(word)}
@@ -38,13 +31,4 @@ class PigLatinizer
     end
   end
 
-  # string ='big apple'
-  # piglatinize(string)
-
-  #'flatiron school' = "atironflay oolschay"
-  #'noodle soup' =  "oodlenay oupsay"
-  #'big apple' = "igbay appleway"
-  #https://medium.com/@c.emily.collins/translating-to-pig-latin-with-ruby-f4e8e91d927e
-
-
-end
+ end
