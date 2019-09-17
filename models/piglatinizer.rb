@@ -1,3 +1,4 @@
+require 'pry'
 class PigLatinizer
     attr_reader :words
 
@@ -8,9 +9,9 @@ class PigLatinizer
     def piglatinize 
         word = words.split(" ")
         result = word.map do |w|
-            first = w[0]
-            rest = w[1..-1]
-            rest << first << "ay"
+            binding.pry
+            first = w.split /([aeiouAEIOU].*)/
+            first
         end
         result
     end
