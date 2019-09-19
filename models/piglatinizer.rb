@@ -2,8 +2,9 @@ require 'pry'
 class PigLatinizer
     attr_reader :phrase
 
-    def piglatinize
+    def piglatinize(phrase)
         word = phrase.split(" ")
+        
     end
 
 end
