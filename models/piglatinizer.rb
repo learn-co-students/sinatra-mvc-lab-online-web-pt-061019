@@ -4,7 +4,6 @@ class PigLatinizer
 
     def piglatinize
         word = phrase.split(" ")
-        binding.pry
     end
 
 end
