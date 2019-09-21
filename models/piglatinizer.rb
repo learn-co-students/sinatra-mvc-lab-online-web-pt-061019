@@ -10,7 +10,7 @@ class PigLatinizer
     end
     pig_latin_word
   end
-
+  
   def to_pig_latin(sentence)
     words_in_sentence = sentence.split(" ")
     pig_latin_words = words_in_sentence.collect do |word|
