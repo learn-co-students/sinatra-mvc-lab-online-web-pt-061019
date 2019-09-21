@@ -1,67 +1,25 @@
 class PigLatinizer
 
   def piglatinize(user_phrase)
-    @new_word = user_phrase.split("")
-    vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]
-    if vowels.include?(@new_word[0])
-      pig_latin_word = begins_with_vowel.join("")
-    else
-      pig_latin_word = begins_with_consonant.join("")
-    end
-    pig_latin_word
+    a = user_phrase.split(" ")
+    b = a.map {|word| piglatinize_word(word)}
+    b.join(" ")
   end
   
-  def to_pig_latin(sentence)
-    words_in_sentence = sentence.split(" ")
-    pig_latin_words = words_in_sentence.collect do |word|
-      self.piglatinize(word)
-    end
-    new_sentence = pig_latin_words.join(" ")
-  end
-
-  def begins_with_vowel
-    vowel_word = @new_word << "way"
-  end
-
-  def begins_with_consonant
-    if @new_word[0] == "q" && @new_word[1] == "u"
-      qu = @new_word[0, 2].join("")
-      spliced_word = @new_word[2..-1]
-      spliced_word << qa + "ay"
-    elsif @new_word[0] == "p" && @new_word[1] =="l"
-      pl = @new_word[0, 2].join("")
-      spliced_word = @new_word[2..-1]
-      spliced_word << pl + "ay"
-    elsif @new_word[0] == "t" && @new_word[1] =="h"
-      th = @new_word[0, 2].join("")
-      spliced_word = @new_word[2..-1]
-      spliced_word << th + "ay"
-    elsif @new_word[0] == "s" && @new_word[1] =="p" && @new_word[2] == "r"
-      spr = @new_word[0, 3].join("")
-      spliced_word = @new_word[3..-1]
-      spliced_word << spr + "ay"
-    elsif @new_word[0] == "p" && @new_word[1] =="r"
-      pr = @new_word[0, 2].join("")
-      spliced_word = @new_word[2..-1]
-      spliced_word << pr + "ay"
-    elsif @new_word[0] == "w" && @new_word[1] =="h"
-      wh = @new_word[0, 2].join("")
-      spliced_word = @new_word[2..-1]
-      spliced_word << wh + "ay"
-    elsif @new_word[0] == "s" && @new_word[1] =="k"
-      sk = @new_word[0, 2].join("")
-      spliced_word = @new_word[2..-1]
-      spliced_word << sk + "ay"
-    elsif (@new_word[0] == "s" || @new_word[0] == "S") && @new_word[1] =="t" && @new_word[2] == "r"
-      str = @new_word[0, 3].join("")
-      spliced_word = @new_word[3..-1]
-      spliced_word << str + "ay"
+  def piglatinize_word(word)
+    first_letter = word[0].downcase
+    if ["a", "e", "i", "o", "u"].include?(first_letter)
+      begins_with_vowel = word + "way"
     else
-      first_letter = @new_word[0]
-      spliced_word = @new_word[1..-1]
-      spliced_word << first_letter + "ay"
+      consonants = []
+      consonants << word[0]
+        if ["a", "e", "i", "o", "u"].include?(word[1]) == false
+          consonants << word[1]
+          if ["a", "e", "i", "o", "u"].include?(word[2]) == false
+            consonants << word[2]
+          end
+        end
+      begins_with_consonant = word[consonants.length..-1] + consonants.join + "ay"
     end
   end
 end
-
-  
