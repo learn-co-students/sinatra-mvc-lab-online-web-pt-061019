@@ -1,36 +1,67 @@
-class Piglatinizer
-  attr_reader :text
- 
-  def initialize(text)
-    @text = text.downcase
+class PigLatinizer
+
+  def piglatinize(user_phrase)
+    @new_word = user_phrase.split("")
+    vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]
+    if vowels.include?(@new_word[0])
+      pig_latin_word = begins_with_vowel.join("")
+    else
+      pig_latin_word = begins_with_consonant.join("")
+    end
+    pig_latin_word
   end
 
-  def original_phrase
-    original = input("Please enter a phrase: ").strip
-    words = text.split(" ")
-    new_words = []
-    for word in words
-      if word[0] == "aeiou"
-          new_word = word + "yay"
-          new_words.append(new_word)
-      else
-          vowel_pos = 0
-          for letter in word
-              if letter != "aeiou"
-                  vowel_pos = vowel_pos + 1
-              else
-                  break
-          cons = word[:vowel_pos]
-          the_rest = word[vowel_pos:]
-          new_word = the_rest + cons + "ay"
-          new_words.append(new_word)
-          output = " ".join(new_words)
-          output
-            end
-          end
-        end
-      end
+  def to_pig_latin(sentence)
+    words_in_sentence = sentence.split(" ")
+    pig_latin_words = words_in_sentence.collect do |word|
+      self.piglatinize(word)
+    end
+    new_sentence = pig_latin_words.join(" ")
+  end
+
+  def begins_with_vowel
+    vowel_word = @new_word << "way"
+  end
+
+  def begins_with_consonant
+    if @new_word[0] == "q" && @new_word[1] == "u"
+      qu = @new_word[0, 2].join("")
+      spliced_word = @new_word[2..-1]
+      spliced_word << qa + "ay"
+    elsif @new_word[0] == "p" && @new_word[1] =="l"
+      pl = @new_word[0, 2].join("")
+      spliced_word = @new_word[2..-1]
+      spliced_word << pl + "ay"
+    elsif @new_word[0] == "t" && @new_word[1] =="h"
+      th = @new_word[0, 2].join("")
+      spliced_word = @new_word[2..-1]
+      spliced_word << th + "ay"
+    elsif @new_word[0] == "s" && @new_word[1] =="p" && @new_word[2] == "r"
+      spr = @new_word[0, 3].join("")
+      spliced_word = @new_word[3..-1]
+      spliced_word << spr + "ay"
+    elsif @new_word[0] == "p" && @new_word[1] =="r"
+      pr = @new_word[0, 2].join("")
+      spliced_word = @new_word[2..-1]
+      spliced_word << pr + "ay"
+    elsif @new_word[0] == "w" && @new_word[1] =="h"
+      wh = @new_word[0, 2].join("")
+      spliced_word = @new_word[2..-1]
+      spliced_word << wh + "ay"
+    elsif @new_word[0] == "s" && @new_word[1] =="k"
+      sk = @new_word[0, 2].join("")
+      spliced_word = @new_word[2..-1]
+      spliced_word << sk + "ay"
+    elsif (@new_word[0] == "s" || @new_word[0] == "S") && @new_word[1] =="t" && @new_word[2] == "r"
+      str = @new_word[0, 3].join("")
+      spliced_word = @new_word[3..-1]
+      spliced_word << str + "ay"
+    else
+      first_letter = @new_word[0]
+      spliced_word = @new_word[1..-1]
+      spliced_word << first_letter + "ay"
     end
   end
+end
 
   
